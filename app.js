@@ -4,6 +4,7 @@ var cors = require("cors");
 const app = express();
 const routes = require("./src/routes");
 const cookieParser = require("cookie-parser");
+const path = require("path");
 
 //allow cors origin
 app.use(
@@ -21,12 +22,15 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 
+app.use(express.static(path.join(__dirname, "frontend-build", "build")));
+
+
 //database connection
 require("./src/config/db.config");
 
 // just for testing purpose
 app.get("/", (req, res) => {
-  res.json({ msg: "app is working" });
+  res.sendFile(path.join(__dirname, 'frontend-build', 'build', 'index.html'))
 });
 
 //routes starts from here
