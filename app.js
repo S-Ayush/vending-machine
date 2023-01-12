@@ -26,7 +26,7 @@ require("./src/config/db.config");
 
 // just for testing purpose
 app.get("/", (req, res) => {
-  res.json(req.body);
+  res.json({ msg: "app is working" });
 });
 
 //routes starts from here
